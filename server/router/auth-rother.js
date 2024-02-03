@@ -4,15 +4,18 @@
 
 const express = require("express");
 const router = express.Router();
- 
-// Method 1
-router.get("/", (req, res) => {
-  res.send("Hello World!.Start a MERN Home Page ");
-});
 
-// Method 2 :- this is most use 
-router.route("/register").get((req, res) => {
-  res.send("Hello World!.Start a MERN To Register Page. ");
-});
+const authControllers = require("../controllers/auth-controllers");
+
+// Method 1
+// router.get("/", (req, res) => {
+//   res.send("Hello World!.Start a MERN Home Page ");
+// });
+
+// Method 2 :- this is most use
+router.route("/").get(authControllers.home);
+
+// Method 2 :- this is most use
+router.route("/register").get(authControllers.register);
 
 module.exports = router;
