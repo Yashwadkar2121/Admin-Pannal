@@ -10,9 +10,9 @@ const home = (req, res) => {
 
 const register = async (req, res) => {
   try {
-    res.send("Hello World!.Start a MERN To Register Page. ");
+    res.json({ message: req.body });
   } catch (error) {
-    res.send({ msg: "Page Not Found" });
+    res.json({ msg: "Page Not Found" });
   }
 };
 module.exports = { home, register };
