@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 var bcrypt = require("bcryptjs");
+var jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -41,6 +42,24 @@ userSchema.pre("save", async function (next) {
     next(error);
   }
 });
+// json web token --> Tokens, such as JWTs (JSON Web Tokens),are typically not stored in the database along with other user details. Instead, they  are issued by the server during the authentication process and then stored on the client-side(e.g., in cookies or local stored) for later use
+userSchema.methods.generateToken = async function () {
+  try {
+    return jwt.sign(
+      {
+        userId: this._id.toString(),
+        email: this.email,
+        isAdmin: this.isAdmin,
+      },
+      process.env.JWT_SECTECT_KEY,
+      {
+        expiresIn: "30d",
+      }
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
 // define the model or the collection name
 const User = new mongoose.model("User", userSchema);
 
