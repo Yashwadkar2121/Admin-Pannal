@@ -18,4 +18,7 @@ router.route("/").get(authControllers.home);
 // Method 2 :- this is most use
 router.route("/register").post(authControllers.register);
 
+// Method 2 :- this is most use
+router.route("/login").post(authControllers.login);
+
 module.exports = router;

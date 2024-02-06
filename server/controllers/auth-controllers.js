@@ -1,4 +1,5 @@
 const User = require("../models/user-model");
+var bcrypt = require("bcryptjs");
 
 // Home Logic
 const home = (req, res) => {
@@ -31,4 +32,32 @@ const register = async (req, res) => {
     res.json({ msg: "Internal Sever Error" });
   }
 };
-module.exports = { home, register };
+
+// Login
+
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const userExist = await User.findOne({ email });
+
+    if (!userExist) {
+      return res.status(500).json({ message: "Invalid Credentials" });
+    }
+
+    const user = await bcrypt.compare(password, userExist.password);
+
+    if (user) {
+      res.status(201).json({
+        msg: "Login Successful",
+        token: await userExist.generateToken(),
+        userId: userExist._id.toString(),
+      });
+    } else {
+      res.status(401).json({ message: "Invalid email or password" });
+    }
+  } catch (error) {
+    res.json({ msg: "Internal Sever Error" });
+  }
+};
+module.exports = { home, register, login };
