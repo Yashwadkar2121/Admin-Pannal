@@ -1,5 +1,6 @@
-// In an Express.js application, a controller refers to a part of your code that is responsible for handling the application's logic. Controllers are typically used to process incoming requests, interact with models(data source), and send responses back to clients. They help organize ypur application by separating concerns and following the MVC (Model-View-Controller) design pattern.
+const User = require("../models/user-model");
 
+// Home Logic
 const home = (req, res) => {
   try {
     res.send("Hello World!.Start a MERN Home Page. ");
@@ -8,11 +9,22 @@ const home = (req, res) => {
   }
 };
 
+// Registration Logic
 const register = async (req, res) => {
   try {
-    res.json({ message: req.body });
+    const { username, email, phone, password } = req.body;
+
+    // Checking Email Exist Or Not
+    const userExist = await User.findOne({ email });
+
+    if (userExist) {
+      return res.json({ msg: "email already exists" });
+    }
+    const userCreated = await User.create({ username, email, phone, password });
+
+    res.json({ msg: userCreated });
   } catch (error) {
-    res.json({ msg: "Page Not Found" });
+    res.json({ msg: "Internal Sever Error" });
   }
 };
 module.exports = { home, register };
