@@ -42,6 +42,12 @@ userSchema.pre("save", async function (next) {
     next(error);
   }
 });
+
+// compare the password
+userSchema.methods.passwordCompare = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
 // json web token --> Tokens, such as JWTs (JSON Web Tokens),are typically not stored in the database along with other user details. Instead, they  are issued by the server during the authentication process and then stored on the client-side(e.g., in cookies or local stored) for later use
 userSchema.methods.generateToken = async function () {
   try {
@@ -60,6 +66,7 @@ userSchema.methods.generateToken = async function () {
     console.error(error);
   }
 };
+
 // define the model or the collection name
 const User = new mongoose.model("User", userSchema);
 
