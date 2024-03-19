@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-var bcrypt = require("bcryptjs");
-var jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema({
   username: {
@@ -25,15 +25,16 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-// secure the password with the bcriypt
+// Method is Pre (secure the password with the bcriypt) that "save" is function to excute after the saveing the data
 userSchema.pre("save", async function (next) {
-  // ? console.log("pre method", this);
+  // In that "this" you get user all data
+  //  console.log("pre method", this);
   const user = this;
-
+  // if password is not Hased then go to next step
   if (!user.isModified("password")) {
     next();
   }
-
+  // Hash the password
   try {
     const saltRound = await bcrypt.genSalt(10);
     const hash_password = await bcrypt.hash(user.password, saltRound);
@@ -42,11 +43,6 @@ userSchema.pre("save", async function (next) {
     next(error);
   }
 });
-
-// compare the password
-userSchema.methods.passwordCompare = async function (password) {
-  return bcrypt.compare(password, this.password);
-};
 
 // json web token --> Tokens, such as JWTs (JSON Web Tokens),are typically not stored in the database along with other user details. Instead, they  are issued by the server during the authentication process and then stored on the client-side(e.g., in cookies or local stored) for later use
 userSchema.methods.generateToken = async function () {
@@ -67,7 +63,12 @@ userSchema.methods.generateToken = async function () {
   }
 };
 
-// define the model or the collection name
+// compare the password
+userSchema.methods.passwordCompare = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
+
+// define the model or the collection name is (User => in database this go to convert into users)
 const User = new mongoose.model("User", userSchema);
 
 module.exports = User;

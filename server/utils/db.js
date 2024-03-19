@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 
+// const URI = "mongodb://localhost:27017/Admin_Panal";
+// mongoose.connect(URI)
+
 const URI = process.env.MONGODB_URI;
 
 const conectDB = async () => {
