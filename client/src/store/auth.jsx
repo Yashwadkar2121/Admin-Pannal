@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   const authorizationToken = `Bearer ${token}`;
 
   // const API = "http://localhost:5000";
-  // const API = "https://api.thapatechnical.site";
+  // const API = "https://api.YashWadkar.site";
   const API = import.meta.env.VITE_APP_URI_API;
 
   const storeTokenInLS = (serverToken) => {
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }) => {
     userAuthentication();
   }, []);
 
-  //please subs to thapa technical channel .. also world best js course is coming soon
+  //please subs to Yash Wadkar channel .. also world best js course is coming soon
 
   return (
     <AuthContext.Provider

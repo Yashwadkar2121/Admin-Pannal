@@ -9,9 +9,7 @@ const home = async (req, res) => {
   try {
     res
       .status(200)
-      .send(
-        "Welcome to world best mern series by thapa technical using router "
-      );
+      .send("Welcome to world best mern series by Yash Wadkar using router ");
   } catch (error) {
     console.log(error);
   }
