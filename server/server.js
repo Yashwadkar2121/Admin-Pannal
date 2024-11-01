@@ -1,26 +1,44 @@
-// if you use dotenv file that line of code require
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
 const app = express();
-const port = 5000;
 const authRoute = require("./router/auth-rother");
-const connectDB = require("./utils/db");
-const errorMiddleware = require("./middlewares/error-middleware");
 const contactRoute = require("./router/contact-router");
+const serviceRoute = require("./router/service-router");
+const adminRoute = require("./router/admin-router");
+const connectDb = require("./utils/db");
+const errorMiddleware = require("./middlewares/error-middleware");
 
-// This line of code adds Express middleware that  parses incoming request bodies with JSON payloads. It's important to place this before any routes that need  to handle JSON data in the request body. This middleware is responsible for parsing JSON data from requests, and it should be applied at the beginning of your middleware stack to ensure it's available for all subsequest routs handlers.
+// let's tackle cors
+const corsOptions = {
+  // origin: "http://localhost:5173",
+  origin: (origin, callback) => {
+    // Check if the origin is allowed
+    const allowedOrigins = ["http://localhost:5173", "http://localhost:4173"];
+    const isAllowed = allowedOrigins.includes(origin);
+    callback(null, isAllowed ? origin : false);
+  },
+  methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
-// Mount the Router : To use the router in your main Express app,you can "mount" it at a specific URL prefix
+// Mount the Router: To use the router in your main Express app, you can "mount" it at a specific URL prefix
 app.use("/api/auth", authRoute);
-app.use("/api/from", contactRoute);
+app.use("/api/form", contactRoute);
+app.use("/api/data", serviceRoute);
 
-// For use to errorMiddleware
+// let's define admin route
+app.use("/api/admin", adminRoute);
+
 app.use(errorMiddleware);
 
-// If database is connect then listen the port
-connectDB().then(() => {
-  app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+const PORT = 5001;
+connectDb().then(() => {
+  app.listen(PORT, () => {
+    console.log(`server is running at port: ${PORT}`);
   });
 });
