@@ -8,10 +8,10 @@ export const Home = () => {
           <div className="container grid grid-two-cols">
             <div className="hero-content">
               <p>We are the World Best IT Company</p>
-              <h1>Welcome to Yash Wadkar</h1>
+              <h1>Welcome to [IT Company]</h1>
               <p>
                 Are you ready to take your business to the next level with
-                cutting-edge IT solutions? Look no further! At Yash Wadkar, we
+                cutting-edge IT solutions? Look no further! At [IT Company], we
                 specialize in providing innovative IT services and solutions
                 tailored to meet your unique needs.
               </p>

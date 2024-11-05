@@ -13,19 +13,19 @@ export const Navbar = () => {
     { to: "/contact", label: "Contact" },
   ];
 
-  const authLinks = isLoggedIn ? [
-    { to: "/logout", label: "Logout" },
-  ] : [
-    { to: "/register", label: "Register" },
-    { to: "/login", label: "Login" },
-  ];
+  const authLinks = isLoggedIn
+    ? [{ to: "/logout", label: "Logout" }]
+    : [
+        { to: "/register", label: "Register" },
+        { to: "/login", label: "Login" },
+      ];
 
   return (
     <>
       <header>
         <div className="container">
           <div className="logo-brand">
-            <NavLink to="/">YashWadkar</NavLink>
+            <NavLink to="/">CompanyName</NavLink>
           </div>
 
           <nav>
