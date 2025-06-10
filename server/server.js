@@ -17,7 +17,7 @@ const corsOptions = {
     const allowedOrigins = [
       "http://localhost:5173",
       "http://localhost:4173",
-      "https://admin-pannal-git-main-yashs-projects-00930977.vercel.app",
+      "https://admin-pannal-five.vercel.app",
     ];
     callback(null, allowedOrigins.includes(origin) ? origin : false);
   },
