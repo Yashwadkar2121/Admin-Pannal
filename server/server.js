@@ -14,7 +14,11 @@ const corsOptions = {
   // origin: "http://localhost:5173",
   origin: (origin, callback) => {
     // Check if the origin is allowed
-    const allowedOrigins = ["http://localhost:5173", "http://localhost:4173"];
+    const allowedOrigins = [
+      "http://localhost:5173",
+      "http://localhost:4173",
+      "https://admin-pannal-five.vercel.app",
+    ];
     const isAllowed = allowedOrigins.includes(origin);
     callback(null, isAllowed ? origin : false);
   },
