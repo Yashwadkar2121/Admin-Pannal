@@ -10,9 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [services, setServices] = useState([]);
   const authorizationToken = `Bearer ${token}`;
 
-  const API = "https://admin-pannal-ic3u.vercel.app";
-  // const API = "https://api.YashWadkar.site";
-  // const API = import.meta.env.VITE_APP_URI_API;
+  const API = import.meta.env.VITE_APP_URI_API || "http://localhost:5001";
 
   const storeTokenInLS = (serverToken) => {
     setToken(serverToken);

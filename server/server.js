@@ -19,15 +19,12 @@ const corsOptions = {
       "http://localhost:4173",
       "https://admin-pannal-five.vercel.app",
     ];
-    const isAllowed = allowedOrigins.includes(origin);
-    callback(null, isAllowed ? origin : false);
+    callback(null, allowedOrigins.includes(origin) ? origin : false);
   },
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credentials: true,
 };
-
 app.use(cors(corsOptions));
-
 app.use(express.json());
 
 // Mount the Router: To use the router in your main Express app, you can "mount" it at a specific URL prefix
