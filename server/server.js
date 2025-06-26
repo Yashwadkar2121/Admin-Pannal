@@ -11,30 +11,18 @@ const errorMiddleware = require("./middlewares/error-middleware");
 
 // Enhanced CORS configuration
 const corsOptions = {
-  origin: (origin, callback) => {
-    const allowedOrigins = [
-      "http://localhost:5173",
-      "http://localhost:4173",
-      "https://admin-pannal-rzfc.vercel.app",
-    ];
-
-    // Allow requests with no origin (like mobile apps or Postman)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      console.warn(`Blocked by CORS: ${origin}`);
-      callback(new Error("Not allowed by CORS"), false);
-    }
-  },
-  methods: "GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS", // MUST include OPTIONS
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:4173",
+    "https://admin-pannal-rzfc.vercel.app",
+    "https://admin-pannal-ic3u.vercel.app",
+  ],
+  methods: "GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS",
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
-  optionsSuccessStatus: 204, // Important for preflight requests
+  optionsSuccessStatus: 204,
 };
 
-// Apply CORS middleware
 app.use(cors(corsOptions));
 
 // Handle preflight requests explicitly
