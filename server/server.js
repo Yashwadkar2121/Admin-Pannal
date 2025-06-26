@@ -26,8 +26,8 @@ const errorMiddleware = require("./middlewares/error-middleware");
 // app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions));
 const allowedOrigins = [
-  "https://admin-pannal-rzfc.vercel.app",
-  "http://localhost:3000",
+  "https://admin-pannal-inky.vercel.app",
+  "http://localhost:5173",
 ];
 
 app.use(
