@@ -10,23 +10,32 @@ const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 
 // Enhanced CORS configuration
-const corsOptions = {
-  origin: [
-    "http://localhost:5173",
-    "http://localhost:4173",
-    "https://admin-pannal-rzfc.vercel.app",
-    "https://admin-pannal-ic3u.vercel.app",
-  ],
-  methods: "GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS",
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true,
-  optionsSuccessStatus: 204,
-};
+// const corsOptions = {
+//   origin: [
+//     "http://localhost:5173",
+//     "http://localhost:4173",
+//     "https://admin-pannal-rzfc.vercel.app",
+//     "https://admin-pannal-ic3u.vercel.app",
+//   ],
+//   methods: "GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS",
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   credentials: true,
+//   optionsSuccessStatus: 204,
+// };
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+// app.options("*", cors(corsOptions));
+const allowedOrigins = [
+  "https://admin-pannal-rzfc.vercel.app",
+  "http://localhost:3000",
+];
 
-// Handle preflight requests explicitly
-app.options("*", cors(corsOptions));
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true, // if you're sending cookies or auth headers
+  })
+);
 
 app.use(express.json());
 
