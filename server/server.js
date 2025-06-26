@@ -16,7 +16,7 @@ const corsOptions = {
     const allowedOrigins = [
       "http://localhost:5173",
       "http://localhost:4173",
-      "https://admin-pannal-five.vercel.app",
+      "https://admin-pannal-rzfc.vercel.app",
     ];
     callback(null, allowedOrigins.includes(origin) ? origin : false);
   },
