@@ -25,7 +25,7 @@ export const Navbar = () => {
       <header>
         <div className="container">
           <div className="logo-brand">
-            <NavLink to="/">CompanyName</NavLink>
+            <NavLink to="/">Pannal Technologies</NavLink>
           </div>
 
           <nav>

@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [services, setServices] = useState([]);
   const authorizationToken = `Bearer ${token}`;
 
-  const API = import.meta.env.VITE_APP_URI_API || "http://localhost:5001";
+  const API = import.meta.env.VITE_APP_URI_API || "http://localhost:5000";
 
   const storeTokenInLS = (serverToken) => {
     setToken(serverToken);
@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   let isLoggedIn = !!token;
-  console.log("isLoggedIN ", isLoggedIn);
+  // console.log("isLoggedIN ", isLoggedIn);
 
   // tackling the logout functionality
   const LogoutUser = () => {
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data.msg);
+        // console.log(data.msg);
         setServices(data.msg);
       }
     } catch (error) {

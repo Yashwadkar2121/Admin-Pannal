@@ -10,7 +10,7 @@ const adminRoute = require("./router/admin-router");
 const connectDb = require("./utils/db");
 const errorMiddleware = require("./middlewares/error-middleware");
 
-// ✅ CORS Setup
+// CORS Setup
 const allowedOrigins = [
   "http://localhost:5173",
   "https://admin-pannal-pi.vercel.app",
@@ -30,20 +30,24 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// ✅ Preflight: This MUST come before routes
+// Preflight: This MUST come before routes
 app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
-// ✅ Routes
+// Routes
 app.use("/api/auth", authRoute);
 app.use("/api/form", contactRoute);
 app.use("/api/data", serviceRoute);
 app.use("/api/admin", adminRoute);
 
-// ✅ Error middleware
+// Error middleware
 app.use(errorMiddleware);
 
-// ✅ Export the app for Vercel
-connectDb();
-module.exports = app;
+
+const PORT = 5000;
+connectDb().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on port: ${PORT}`);
+  });
+});

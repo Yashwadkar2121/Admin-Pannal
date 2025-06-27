@@ -13,7 +13,7 @@ const authMiddleware = async (req, res, next) => {
 
   // Assuming token is in the format "Bearer <jwtToken>, Removing the "Bearer" prefix"
   const jwtToken = token.replace("Bearer", "").trim();
-  console.log("token form auth middleware", jwtToken);
+  // console.log("token form auth middleware", jwtToken);
 
   try {
     const isVerified = jwt.verify(jwtToken, process.env.JWT_SECRET_KEY);
