@@ -36,6 +36,7 @@ export const AuthProvider = ({ children }) => {
         headers: {
           Authorization: authorizationToken,
         },
+        credentials: "include",
       });
 
       if (response.ok) {
@@ -57,6 +58,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await fetch(`${API}/api/data/service`, {
         method: "GET",
+        credentials: "include",
       });
 
       if (response.ok) {
