@@ -49,9 +49,5 @@ app.use("/api/admin", adminRoute);
 // Error middleware
 app.use(errorMiddleware);
 
-const PORT = 5000;
-connectDb().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on port: ${PORT}`);
-  });
-});
+connectDb();
+module.exports = app;
